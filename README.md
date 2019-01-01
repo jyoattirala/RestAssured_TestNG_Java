@@ -2,7 +2,7 @@
 # Objective : 
 Developed a sample framework which support to develop automation test scripts for API services. 
 
-# Tools used:
+# Libraries used:
 1. Java
 2. Rest Assured
 3. TestNG
@@ -18,5 +18,5 @@ Developed a sample framework which support to develop automation test scripts fo
     - mvn test :- To execute the test scenarios
 
 
-References: 
+# References: 
 https://reqres.in/

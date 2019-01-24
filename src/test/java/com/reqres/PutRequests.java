@@ -2,6 +2,7 @@ package com.reqres;
 
 import static io.restassured.RestAssured.given;
 
+import org.apache.http.HttpStatus;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -15,7 +16,7 @@ public class PutRequests extends TestConfig {
 	public void verifyUpdateUserDetails() {
 		try {
 			given().header("Content-Type", "application/json").body(Payload.getUserDetailsWithName()).when()
-					.put(Resources.getUser2EndPoint()).then().statusCode(200).log().all();
+					.put(Resources.getUser2EndPoint()).then().statusCode(HttpStatus.SC_OK).log().all();
 		} catch (Exception e) {
 			e.printStackTrace();
 			Assert.fail("Exception thrown Test case failed :" + e.getMessage(), e);

@@ -2,6 +2,7 @@ package com.reqres;
 
 import static io.restassured.RestAssured.given;
 
+import org.apache.http.HttpStatus;
 import org.testng.Assert;
 import org.testng.Reporter;
 import org.testng.annotations.Test;
@@ -19,7 +20,7 @@ public class PostRequests extends TestConfig {
 	public void verifyUsersRegistration() {
 		try {
 			given().header("Content-Type", "application/json").body(Payload.getUserDetailsWithEmail()).when()
-					.post(Resources.getRegisterEndPoint()).then().statusCode(201).log().all();
+					.post(Resources.getRegisterEndPoint()).then().statusCode(HttpStatus.SC_CREATED).log().all();
 		} catch (Exception e) {
 			e.printStackTrace();
 			Assert.fail("Exception thrown Test case failed :" + e.getMessage(), e);
@@ -30,7 +31,7 @@ public class PostRequests extends TestConfig {
 	public void verifyUsersEntryAndResponseconsistId() {
 		try {
 			Response res = given().header("Content-Type", "application/json").body(Payload.getUserDetailsWithName())
-					.when().post(Resources.getUserEntryEndPoint()).then().statusCode(201).log().all().extract()
+					.when().post(Resources.getUserEntryEndPoint()).then().statusCode(HttpStatus.SC_CREATED).log().all().extract()
 					.response();
 			JsonPath js = JsonUtil.rawToJson(res);
 			String id = js.get("id");

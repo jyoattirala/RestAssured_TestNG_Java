@@ -4,6 +4,7 @@ import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.hasItems;
 
+import org.apache.http.HttpStatus;
 import org.testng.Assert;
 import org.testng.Reporter;
 import org.testng.annotations.Test;
@@ -20,7 +21,7 @@ public class GetRequests extends TestConfig {
 	 @Test
 	public void verifyListOfUserSuccessResponse() {
 		try {
-			given().when().get(Resources.getUsersPage2EndPoint()).then().assertThat().statusCode(200);
+			given().when().get(Resources.getUsersPage2EndPoint()).then().assertThat().statusCode(HttpStatus.SC_OK);
 		} catch (Exception e) {
 			e.printStackTrace();
 			Assert.fail("Exception thrown Test case failed :" + e.getMessage(), e);
@@ -30,7 +31,7 @@ public class GetRequests extends TestConfig {
 	 @Test
 	public void verifyListOfUsersJsonValues() {
 		try {
-			given().log().all().when().get(Resources.getUsersPage2EndPoint()).then().assertThat().statusCode(200).log().all()
+			given().log().all().when().get(Resources.getUsersPage2EndPoint()).then().assertThat().statusCode(HttpStatus.SC_OK).log().all()
 					.and().contentType(ContentType.JSON).and().body("data[0].id", equalTo(4)).and()
 					.body("data[0].first_name", equalTo("Eve")).and().body("data[0].last_name", equalTo("Holt"));
 		} catch (Exception e) {
@@ -43,7 +44,7 @@ public class GetRequests extends TestConfig {
 	 @Test
 	public void verifyAllTheFirstNameValuesFromResponsePayload() {
 		try {
-			given().log().all().when().get(Resources.getUsersPage2EndPoint()).then().assertThat().statusCode(200).log().all()
+			given().log().all().when().get(Resources.getUsersPage2EndPoint()).then().assertThat().statusCode(HttpStatus.SC_OK).log().all()
 					.and().contentType(ContentType.JSON).and()
 					.body("data.first_name", hasItems("Eve", "Charles", "Tracey"));
 		} catch (Exception e) {
@@ -55,7 +56,7 @@ public class GetRequests extends TestConfig {
 	 @Test
 	public void verifyAllTheLasNameValuesFromResponsePayload() {
 		try {
-			given().log().all().when().get(Resources.getUsersPage2EndPoint()).then().assertThat().statusCode(200).log().all()
+			given().log().all().when().get(Resources.getUsersPage2EndPoint()).then().assertThat().statusCode(HttpStatus.SC_OK).log().all()
 					.and().contentType(ContentType.JSON).and()
 					.body("data.last_name", hasItems("Holt", "Morris", "Ramos"));
 		} catch (Exception e) {
